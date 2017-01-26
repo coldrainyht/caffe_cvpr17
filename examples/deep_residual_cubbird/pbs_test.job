@@ -1,0 +1,9 @@
+#!/bin/bash
+#PBS -N work1
+#PBS -l nodes=1:compute-0-2:ppn=1
+#PBS -j oe
+#PBS -l walltime=72:00:00
+cd $PBS_O_WORKDIR
+nprocs=`cat $PBS_NODEFILE | wc -l`
+cat $PBS_NODEFILE > NODEFILE
+/home/yaohantao/caffe_residual/build/tools/caffe train --solver=solver_test.prototxt --weights=models/ResNet_448_iter_50000.caffemodel --gpu 7
